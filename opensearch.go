@@ -31,6 +31,7 @@ import (
 	"encoding/json"
 	"errors"
 	"fmt"
+	"github.com/opensearch-project/opensearch-go/aws"
 	"io"
 	"io/ioutil"
 	"net/http"
@@ -75,6 +76,8 @@ type Config struct {
 	Addresses []string // A list of nodes to use.
 	Username  string   // Username for HTTP Basic Authentication.
 	Password  string   // Password for HTTP Basic Authentication.
+
+	AWSConfig  *aws.Config // To support request signing for AWS Services
 
 	Header http.Header // Global HTTP request header.
 

@@ -32,6 +32,7 @@ import (
 	"crypto/x509"
 	"errors"
 	"fmt"
+	"github.com/opensearch-project/opensearch-go/aws"
 	"io"
 	"io/ioutil"
 	"net"
@@ -85,6 +86,8 @@ type Config struct {
 	Username     string
 	Password     string
 
+	AWS 		 *aws.Config
+
 	Header http.Header
 	CACert []byte
 
@@ -117,6 +120,8 @@ type Client struct {
 	username     string
 	password     string
 	header       http.Header
+
+	aws     	 *aws.Config
 
 	retryOnStatus         []int
 	disableRetry          bool

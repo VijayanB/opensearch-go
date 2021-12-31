@@ -191,6 +191,8 @@ func NewClient(cfg Config) (*Client, error) {
 		Username:     cfg.Username,
 		Password:     cfg.Password,
 
+		AWS: cfg.AWSConfig,
+
 		Header: cfg.Header,
 		CACert: cfg.CACert,
 

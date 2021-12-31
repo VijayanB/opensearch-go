@@ -313,6 +313,7 @@ func (c *Client) Perform(req *http.Request) (*http.Response, error) {
 		// Update request
 		c.setReqURL(conn.URL, req)
 		c.setReqAuth(conn.URL, req)
+		c.signRequest(req)
 
 		if !c.disableRetry && i > 0 && req.Body != nil && req.Body != http.NoBody {
 			body, err := req.GetBody()
@@ -446,6 +447,13 @@ func (c *Client) setReqAuth(u *url.URL, req *http.Request) *http.Request {
 
 func (c *Client) setReqUserAgent(req *http.Request) *http.Request {
 	req.Header.Set("User-Agent", userAgent)
+	return req
+}
+
+func (c *Client) signRequest(req *http.Request) *http.Request {
+	if c.aws != nil {
+		aws.SignRequest(req, c.aws)
+	}
 	return req
 }
 
